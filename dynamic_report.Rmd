@@ -1,0 +1,108 @@
+---
+title: My dynamic report
+output: html_fragment
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE, error=FALSE)
+
+```
+
+```{css}
+
+```
+
+## Tracking characteristics of physical advertising across various mediums
+
+This report investigates observations made on the nature and characteristics of 
+various different physical advertising mediums, including the impression and effectiveness in engendering actioned on interest. 
+
+First, we load in the data and rename the column names
+```{r}
+# Load in data
+logged_data <-read_csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vTAitmwfV7XPKgW1QcHW65PVqpqmJ_SsYAFvoj34tUaMNqk2mL3PgVSGG8KfQ85QM9164K_Iod9i-vM/pub?output=csv")
+
+# Rename columns
+latest_data <- logged_data %>% 
+  rename(
+    age = 2,
+    medium = 3, 
+    industry = 4,
+    interest = 5,
+    act = 6,
+    appeal = 7,
+    num_sentences = 8,
+    num_images = 9,
+    gender = 10)
+
+print(latest_data)
+
+```
+
+# Mean reported interest in the physical advertising observed
+```{r}
+mean_interest = round(mean(latest_data$interest, na.rm = TRUE), 3)
+
+paste0("The mean interest in advertisements out of 5 was ", mean_interest, ".")
+```
+
+
+# Number of sentences in observed physical advertising 
+```{r}
+mean_num_sentences = round(mean(latest_data$num_sentences, na.rm = TRUE), 3)
+max_num_sentences = max(latest_data$num_sentences, na.rm = TRUE)
+min_num_sentences = min(latest_data$num_sentences, na.rm = TRUE)
+
+paste0("The minimum number of sentences in an observed physical advertisment was ", min_num_sentences, ". The maximum number of sentences was ", max_num_sentences,". The mean was ",  mean_num_sentences, ".")
+```
+
+# Number of images in observed physical advertising 
+```{r}
+mean_num_images = round(mean(latest_data$num_images, na.rm = TRUE), 3)
+max_num_images = max(latest_data$num_images, na.rm = TRUE)
+min_num_images = min(latest_data$num_images, na.rm = TRUE)
+
+paste0("The minimum number of images in an observed physical advertisment was ", min_num_images, ". The maximum number of images was ", max_num_images,". The mean was ",  mean_num_images ,  ".")
+```
+
+# Bar plot displaying frequency of different advertising mediums
+```{r fig.width = 12, fig.height = 8}
+latest_data %>%
+  ggplot() +
+  geom_bar(aes(y = medium)) +
+  labs(title = "Frequency of Specific Observed Physical Advertising Mediums",
+       x = "Frequency",
+       y = "Medium",
+       caption = "Source: Physical Advertising Tracking survey")
+
+
+```
+
+# Bar plot displaying frequency the industry the advertisement is associated with
+```{r fig.width = 12, fig.height = 12}
+latest_data %>%
+  ggplot() +
+  geom_bar(aes(y = industry)) +
+  labs(title = "Industry Associated with Observed Physical Advertising",
+       x = "Frequency",
+       y = "Industry",
+       caption = "Source: Physical Advertising Tracking survey")
+
+
+```
+
+# Bar plot displaying frequency of different advertising mediums
+```{r fig.width = 12, fig.height = 12}
+
+appeal_formatted <- unlist(strsplit(latest_data$appeal,","))
+
+ggplot() +
+  geom_bar(aes(y = appeal_formatted)) +
+  labs(title = "Element of Advertisement Found Most Memorable",
+       x = "Frequency",
+       y = "Element of Advertisement",
+       caption = "Source: Physical Advertising Tracking survey")
+
+
+
+```
