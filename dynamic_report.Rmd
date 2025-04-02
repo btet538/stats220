@@ -9,16 +9,36 @@ knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE, error=FALSE)
 ```
 
 ```{css}
+body {
+  background: #FAEBD7 ; 
+  color: black;
+  font-family: 'Helvetica'
+  
+}
+
+h1, h3, h4, h2 {
+  text-align:center;
+  font-weight: 600;
+  padding: 30px;
+  
+}
+
+
+p {
+font-size: 20px;
+padding: 0 30px;
+
+}
 
 ```
 
-## Tracking characteristics of physical advertising across various mediums
+# Tracking Characteristics of Physical Advertising Across Various Mediums
 
 This report investigates observations made on the nature and characteristics of 
-various different physical advertising mediums, including the impression and effectiveness in engendering actioned on interest. 
+various different physical advertising mediums, including the impression and effectiveness in engendering actioned on interest. I wanted to understand common features of physical advertising, who uses it and how it is used, and what elements seem to be most effective.
 
-First, we load in the data and rename the column names
 ```{r}
+library(tidyverse)
 # Load in data
 logged_data <-read_csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vTAitmwfV7XPKgW1QcHW65PVqpqmJ_SsYAFvoj34tUaMNqk2mL3PgVSGG8KfQ85QM9164K_Iod9i-vM/pub?output=csv")
 
@@ -34,12 +54,9 @@ latest_data <- logged_data %>%
     num_sentences = 8,
     num_images = 9,
     gender = 10)
-
-print(latest_data)
-
 ```
 
-# Mean reported interest in the physical advertising observed
+## Mean reported interest in the physical advertising observed
 ```{r}
 mean_interest = round(mean(latest_data$interest, na.rm = TRUE), 3)
 
@@ -47,8 +64,8 @@ paste0("The mean interest in advertisements out of 5 was ", mean_interest, ".")
 ```
 
 
-# Number of sentences in observed physical advertising 
-```{r}
+## Number of sentences in observed physical advertising 
+```{r }
 mean_num_sentences = round(mean(latest_data$num_sentences, na.rm = TRUE), 3)
 max_num_sentences = max(latest_data$num_sentences, na.rm = TRUE)
 min_num_sentences = min(latest_data$num_sentences, na.rm = TRUE)
@@ -56,8 +73,8 @@ min_num_sentences = min(latest_data$num_sentences, na.rm = TRUE)
 paste0("The minimum number of sentences in an observed physical advertisment was ", min_num_sentences, ". The maximum number of sentences was ", max_num_sentences,". The mean was ",  mean_num_sentences, ".")
 ```
 
-# Number of images in observed physical advertising 
-```{r}
+## Number of images in observed physical advertising 
+```{r }
 mean_num_images = round(mean(latest_data$num_images, na.rm = TRUE), 3)
 max_num_images = max(latest_data$num_images, na.rm = TRUE)
 min_num_images = min(latest_data$num_images, na.rm = TRUE)
@@ -65,44 +82,72 @@ min_num_images = min(latest_data$num_images, na.rm = TRUE)
 paste0("The minimum number of images in an observed physical advertisment was ", min_num_images, ". The maximum number of images was ", max_num_images,". The mean was ",  mean_num_images ,  ".")
 ```
 
-# Bar plot displaying frequency of different advertising mediums
+## What was the most commonly observed medium for physical advertising? 
 ```{r fig.width = 12, fig.height = 8}
 latest_data %>%
   ggplot() +
-  geom_bar(aes(y = medium)) +
+  geom_bar(aes(y = medium), fill="#654321") +
   labs(title = "Frequency of Specific Observed Physical Advertising Mediums",
        x = "Frequency",
        y = "Medium",
-       caption = "Source: Physical Advertising Tracking survey")
+       caption = "Source: Physical Advertising Tracking survey") +
+  theme(plot.background = element_rect(fill = "#FAEBD7"),
+        panel.background = element_rect(fill = "#D1B399",
+                                colour = "#D1B399",
+                                size = 0.5, linetype = "solid"),
+          panel.border = element_blank(),
+          panel.grid.major = element_blank(),
+          panel.grid.minor = element_blank())
 
 
 ```
 
-# Bar plot displaying frequency the industry the advertisement is associated with
+\n We can see from the above plot that that the most common medium was poster, followed by billboards and bus stops, and then by newspaper and magazines.\n
+
+## What industry was associated with observed physical avertising the most? 
 ```{r fig.width = 12, fig.height = 12}
 latest_data %>%
   ggplot() +
-  geom_bar(aes(y = industry)) +
+  geom_bar(aes(y = industry), , fill="#654321") +
   labs(title = "Industry Associated with Observed Physical Advertising",
        x = "Frequency",
        y = "Industry",
-       caption = "Source: Physical Advertising Tracking survey")
+       caption = "Source: Physical Advertising Tracking survey") +
+  theme(plot.background = element_rect(fill = "#FAEBD7"),
+        panel.background = element_rect(fill = "#D1B399",
+                                colour = "#D1B399",
+                                size = 0.5, linetype = "solid"),
+          panel.border = element_blank(),
+          panel.grid.major = element_blank(),
+          panel.grid.minor = element_blank())
 
 
 ```
 
-# Bar plot displaying frequency of different advertising mediums
+\n The above plot suggests that that the most common industry was fashion, followed by beverages, and then by food, hospitality and entertainment, equally.\n
+
+## What elements of the advertsising were most memorable? 
 ```{r fig.width = 12, fig.height = 12}
 
 appeal_formatted <- unlist(strsplit(latest_data$appeal,","))
 
 ggplot() +
-  geom_bar(aes(y = appeal_formatted)) +
+  geom_bar(aes(y = appeal_formatted), , fill="#654321") +
   labs(title = "Element of Advertisement Found Most Memorable",
        x = "Frequency",
        y = "Element of Advertisement",
-       caption = "Source: Physical Advertising Tracking survey")
+       caption = "Source: Physical Advertising Tracking survey") +
+  theme(plot.background = element_rect(fill = "#FAEBD7"),
+        panel.background = element_rect(fill = "#D1B399",
+                                colour = "#D1B399",
+                                size = 0.5, linetype = "solid"),
+          panel.border = element_blank(),
+          panel.grid.major = element_blank(),
+          panel.grid.minor = element_blank())
 
 
 
 ```
+
+\n From the above plot, we can see that that the element of physical advertising that was most memorable was imagery, followed by brand, then product and then copy.
+\n
