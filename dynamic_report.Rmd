@@ -32,7 +32,7 @@ padding: 0 30px;
 
 ```
 
-# Tracking Characteristics of Physical Advertising Across Various Mediums
+## Tracking Characteristics of Physical Advertising Across Various Mediums
 
 This report investigates observations made on the nature and characteristics of 
 various different physical advertising mediums, including the impression and effectiveness in engendering actioned on interest. I wanted to understand common features of physical advertising, who uses it and how it is used, and what elements seem to be most effective.
@@ -104,7 +104,7 @@ latest_data %>%
 
 \n We can see from the above plot that that the most common medium was poster, followed by billboards and bus stops, and then by newspaper and magazines.\n
 
-## What industry was associated with observed physical avertising the most? 
+## What industry had the most observed physical avertising? 
 ```{r fig.width = 12, fig.height = 12}
 latest_data %>%
   ggplot() +
@@ -126,7 +126,7 @@ latest_data %>%
 
 \n The above plot suggests that that the most common industry was fashion, followed by beverages, and then by food, hospitality and entertainment, equally.\n
 
-## What elements of the advertsising were most memorable? 
+## What elements of the advertising were most memorable? 
 ```{r fig.width = 12, fig.height = 12}
 
 appeal_formatted <- unlist(strsplit(latest_data$appeal,","))
