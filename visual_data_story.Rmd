@@ -1,0 +1,106 @@
+---
+title: Approaches to Physical Advertising
+output: html_document
+---
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE, error=FALSE)
+```
+
+```{js}
+$(function() {
+  $(".level2").css('visibility', 'hidden');
+  $(".level2").first().css('visibility', 'visible');
+  $(".container-fluid").height($(".container-fluid").height() + 300);
+  $(window).on('scroll', function() {
+    $('h2').each(function() {
+      var h2Top = $(this).offset().top - $(window).scrollTop();
+      var windowHeight = $(window).height();
+      if (h2Top >= 0 && h2Top <= windowHeight / 2) {
+        $(this).parent('div').css('visibility', 'visible');
+      } else if (h2Top > windowHeight / 2) {
+        $(this).parent('div').css('visibility', 'hidden');
+      }
+    });
+  });
+})
+```
+
+```{css}
+.figcaption {display: none}
+title {
+
+}
+body {
+  color: black;
+  background: #F2F2E3; 
+  color: ##505041
+  
+}
+
+h1 {
+  text-align: center;
+}
+
+h1, h3, h4, h2 {
+  font-family: Tahoma, san-serif;
+  font-weight: 500;
+  margin: 30px 0;
+}
+
+
+p {
+font-size: 16px;
+font-family: 'Optima';
+
+}
+```
+
+## What properties of physical advertising are altered when targeting a specific class?
+I wanted to understand how different mediums of physical advertising impact the kind of advertising observed and how it may be deployed differently depending on the social class being targeted. I considered how different mediums might affect the number of images used and the length of the copy. And whether this carries over when targeting specific social classes. I thought this might give some insight into what kind of advertising is more successful for targeting different social classes and how the type of advertising differs across mediums. 
+
+## More sentences used in print advertising?
+<p> In some sense, this makes sense. Readers of print advertising, which in this case means specifically magazines, newspapers and flyers, are already primed to consume text. They have the time (which cannot always be said for billboards, posters, bus stops, etc.) and the willingness to do so, especially if an advertisement catches their eye. We can see that newspaper and magazine advertising has the greatest number of sentences, on average, by some margin.</p>
+
+<center>
+
+![Mean number of sentences used in each medium](./plot1.png)
+</center>
+However, it may better to investigate this by comparing the median value.
+
+<center>
+
+![Median number of sentences used in each medium](./plot2.png)
+</center>
+
+Presenting the data in this way shows us that there are what I would consider outliers for the newspaper and magazine mediums that are pulling up the mean and that, in reality, perhaps there is not much of a difference between mediums. Interestingly, bus advertising (advertising that I observed on the back of buses) has a high median number of sentences, on average. I suppose I find this a bit surprising as you would think copy on a moving object most likely observed by other moving objects would need to be short, but there isn't a lot of data on this (n=2), so that could be the explanation. 
+
+## Advertising targeted to the working class uses fewer words and images
+I was also interested in the aspect of advertising in the class. Undoubtedly, certain advertising is used to appeal to specific social classes. Rolex is very obviously not going to try and appeal to the working class, even if those from that social class can afford one. The data suggests that the advertising I observed that I classified as targeting a specific social class, the working class advertising, had the fewest images and the fewest sentences. This is not particularly surprising. 
+
+<center>
+
+![Number of sentences and images (mean) by social class](./plot3.png)
+</center>
+
+I suspect this may be because much of the physical advertising I consumed that was subsequently classified as working class was advertising about food. For example, this is the kind of physical 'food' advertising I often saw (not observed):
+
+<center>
+
+![Hienz ad](./example1.jpg)
+</center>
+
+As above, these advertisements seemed to emphasis a single image and tagline - which could explain the relatively low average. 
+
+## No trend in the time a specific medium of physical advertising is observed
+<p>There is no observable trend in the medium of advertising over the day <p/>
+
+<center>
+
+![Time series of observations by medium](./plot4.png)
+</center>
+I thought this would be the case. I'm much more likely to observe billboards, bus stops, and bus advertising during my commute, as well as newspaper and magazine advertising in the morning and at night, so why doesn't it show up in the data? Admittedly, this is due to how I collected my data, often inputting observations in bulk. Partly, this was the intention as I wanted to record memorable advertising specifically, but also, usually, the advertising I observed was during commuting or walking around a mall or the city with someone or reading something at night before bed. This made it difficult for me to input each observation as it occurred. Next time, I would perhaps try to develop a system to allow me to do this, as I initially hadn't considered how time may be an important variable to investigate.
+
+
